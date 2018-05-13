@@ -1,3 +1,21 @@
+
+// 0 No error condition
+//    * 1 Format error - unable to interpret query
+//       * 2 Server failure - internal problem
+//          * 3 Name error - Only for authorative name server, domain name of query does not exist
+//             * 4 Not implemented - Request not supported
+//                * 5 Refused - Nameserver refuses request
+//    * 6 - 15 Reserved for future usage
+//       * 
+export enum ErrorCodes {
+   NoError = 0,
+   FormatError,
+   ServerFailure,
+   NameError,
+   NotImplemented,
+   Refused
+}
+
 export interface MessageHeader {
    /**
     *  A 16 bit identifier assigned by the program that
@@ -69,7 +87,7 @@ export interface MessageHeader {
     * 5 Refused - Nameserver refuses request
     * 6-15 Reserved for future usage
     */
-   RCODE: 0 | 1 | 2 | 3 | 4 | 5;
+   RCODE: ErrorCodes;
 
    /**
     * Number of entries in question section

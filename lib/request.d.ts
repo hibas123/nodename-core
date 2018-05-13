@@ -1,5 +1,5 @@
 /// <reference types="node" />
-import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord } from "./types";
+import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord, ErrorCodes } from "./types";
 export declare enum QueryTypes {
     /**
      * IPv4 address
@@ -101,6 +101,7 @@ export declare class Request implements Message {
     additionals: RecourceRecord[];
     _packet: Buffer;
     constructor(packet: Buffer, sendCallback: (packet: Buffer) => any);
+    error(error: ErrorCodes): void;
     send(): void;
     serialize(truncate?: boolean, rcode?: 0 | 1 | 2 | 3 | 4 | 5): Buffer;
     private serializeHeader();

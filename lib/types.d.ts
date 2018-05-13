@@ -1,4 +1,12 @@
 /// <reference types="node" />
+export declare enum ErrorCodes {
+    NoError = 0,
+    FormatError = 1,
+    ServerFailure = 2,
+    NameError = 3,
+    NotImplemented = 4,
+    Refused = 5,
+}
 export interface MessageHeader {
     /**
      *  A 16 bit identifier assigned by the program that
@@ -61,7 +69,7 @@ export interface MessageHeader {
      * 5 Refused - Nameserver refuses request
      * 6-15 Reserved for future usage
      */
-    RCODE: 0 | 1 | 2 | 3 | 4 | 5;
+    RCODE: ErrorCodes;
     /**
      * Number of entries in question section
      * uint16

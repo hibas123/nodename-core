@@ -1,5 +1,5 @@
 import { Parser } from "binary-parser"
-import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord } from "./types"
+import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord, ErrorCodes } from "./types"
 
 const MAX_LABEL_SIZE = 63;
 
@@ -191,6 +191,10 @@ export class Request implements Message {
       this._header = <any>headerParser.parse(headerData);
       this._header.AD = 0;
       this._questions = parseQuestions(this._header.QDCOUNT, bodyData);
+   }
+
+   error(error: ErrorCodes) {
+      this._header.RCODE = error;
    }
 
    send() {
