@@ -188,12 +188,12 @@ export function SerializeName(name: string) {
 }
 
 export class Request implements Message {
-   _header: MessageHeader;
+   private _header: MessageHeader;
    get header() {
       return Object.assign({}, this._header);
    }
 
-   _questions: MessageQuestion[];
+   private _questions: MessageQuestion[];
    get questions() {
       return this._questions.map(e => e);
    }
@@ -202,9 +202,7 @@ export class Request implements Message {
    authorities: RecourceRecord[] = [];
    additionals: RecourceRecord[] = [];
 
-   _packet: Buffer;
    constructor(packet: Buffer, private sendCallback: (packet: Buffer) => any) {
-      this._packet = packet;
       let headerData = Buffer.alloc(12);
       packet.copy(headerData, 0, 0, 12);
       let bodyData = Buffer.alloc(packet.length - 12);

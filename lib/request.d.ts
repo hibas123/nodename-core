@@ -93,14 +93,13 @@ export declare enum QueryTypes {
 export declare function SerializeName(name: string): Buffer;
 export declare class Request implements Message {
     private sendCallback;
-    _header: MessageHeader;
+    private _header;
     readonly header: MessageHeader;
-    _questions: MessageQuestion[];
+    private _questions;
     readonly questions: MessageQuestion[];
     answers: RecourceRecord[];
     authorities: RecourceRecord[];
     additionals: RecourceRecord[];
-    _packet: Buffer;
     constructor(packet: Buffer, sendCallback: (packet: Buffer) => any);
     error(error: ErrorCodes): void;
     noRecursion(): void;
