@@ -1,4 +1,5 @@
 import { Parser } from "binary-parser"
+import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord } from "./types"
 
 const MAX_LABEL_SIZE = 63;
 

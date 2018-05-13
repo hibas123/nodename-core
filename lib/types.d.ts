@@ -1,5 +1,5 @@
 /// <reference types="node" />
-interface MessageHeader {
+export interface MessageHeader {
     /**
      *  A 16 bit identifier assigned by the program that
      *  generates any kind of query.  This identifier is copied
@@ -83,7 +83,7 @@ interface MessageHeader {
      */
     ARCOUNT: number;
 }
-interface MessageQuestion {
+export interface MessageQuestion {
     /**
      * Domain name represented as sequence of labels
      * Each label consists of a length octed followed
@@ -101,7 +101,7 @@ interface MessageQuestion {
      */
     QCLASS: number;
 }
-interface MessageRecourceRecord {
+export interface MessageRecourceRecord {
     /**
      * Domain name to wich resource record pertains
      */
@@ -143,7 +143,7 @@ interface MessageRecourceRecord {
      */
     RDATA: Buffer;
 }
-interface Message {
+export interface Message {
     header: MessageHeader;
     questions: MessageQuestion[];
     answers: MessageRecourceRecord[];
