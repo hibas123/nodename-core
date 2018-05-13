@@ -90,6 +90,7 @@ export declare enum QueryTypes {
      */
     ANY = 255,
 }
+export declare function SerializeName(name: string): Buffer;
 export declare class Request implements Message {
     private sendCallback;
     _header: MessageHeader;
@@ -107,7 +108,6 @@ export declare class Request implements Message {
     private serializeHeader();
     private serializeQuestion(question);
     private serializeResourceRecord(record);
-    private serializeName(name);
 }
 export declare class RecourceRecord implements MessageRecourceRecord {
     NAME: string;

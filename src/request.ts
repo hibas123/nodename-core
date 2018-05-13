@@ -165,6 +165,28 @@ function parseQuestions(count: number, packet: Buffer): MessageQuestion[] {
       }).parse(packet).questions;
 }
 
+export function SerializeName(name: string) {
+   let length = 0;
+   let parts = name.split(".");
+   parts.forEach(e => {
+      // Length of part and byte that holds the length information
+      if (e.length > MAX_LABEL_SIZE) throw new Error("Label to large");
+      length += e.length + 1;
+   })
+
+   length += 1; //Adding last 0 length octet
+   let data = Buffer.alloc(length);
+   let offset = 0;
+   parts.forEach(e => {
+      data.writeUInt8(e.length, offset)
+      offset++
+      data.write(e, offset, e.length)
+      offset += e.length
+   })
+   data.writeUInt8(0, offset);
+   return data;
+}
+
 export class Request implements Message {
    _header: MessageHeader;
    get header() {
@@ -280,7 +302,7 @@ export class Request implements Message {
    }
 
    private serializeQuestion(question: MessageQuestion) {
-      let qname = this.serializeName(question.QNAME);
+      let qname = SerializeName(question.QNAME);
       let data = Buffer.alloc(qname.length + 4);
       qname.copy(data, 0, 0, qname.length);
       let offset = qname.length;
@@ -292,7 +314,7 @@ export class Request implements Message {
 
    private serializeResourceRecord(record: MessageRecourceRecord) {
       // TODO: Implement compression
-      let name = this.serializeName(record.NAME);
+      let name = SerializeName(record.NAME);
       let data = Buffer.alloc(name.length + 10 + record.RDLENGTH) // For TYPE, CLASS, TTL, RLENGTH
       name.copy(data, 0, 0, name.length);
       let offset = name.length;
@@ -305,28 +327,6 @@ export class Request implements Message {
       data.writeUInt16BE(record.RDLENGTH, offset)
       offset += 2
       record.RDATA.copy(data, offset, 0, record.RDLENGTH)
-      return data;
-   }
-
-   private serializeName(name: string) {
-      let length = 0;
-      let parts = name.split(".");
-      parts.forEach(e => {
-         // Length of part and byte that holds the length information
-         if (e.length > MAX_LABEL_SIZE) throw new Error("Label to large");
-         length += e.length + 1;
-      })
-
-      length += 1; //Adding last 0 length octet
-      let data = Buffer.alloc(length);
-      let offset = 0;
-      parts.forEach(e => {
-         data.writeUInt8(e.length, offset)
-         offset++
-         data.write(e, offset, e.length)
-         offset += e.length
-      })
-      data.writeUInt8(0, offset);
       return data;
    }
 }
