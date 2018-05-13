@@ -8,11 +8,34 @@
 //    * 6 - 15 Reserved for future usage
 //       * 
 export enum ErrorCodes {
+   /**
+    * No error
+    */
    NoError = 0,
+
+   /**
+    * Format error - unable to interpret query
+    */
    FormatError,
+
+   /**
+    * Server failure - internal problem
+    */
    ServerFailure,
+
+   /**
+    * Name error - Only for authorative name server, domain name of query does not exist
+    */
    NameError,
+
+   /**
+    * Not implemented - Request not supported
+    */
    NotImplemented,
+
+   /**
+    * Refused - Nameserver refuses request
+    */
    Refused
 }
 

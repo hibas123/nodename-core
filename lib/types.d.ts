@@ -1,10 +1,28 @@
 /// <reference types="node" />
 export declare enum ErrorCodes {
+    /**
+     * No error
+     */
     NoError = 0,
+    /**
+     * Format error - unable to interpret query
+     */
     FormatError = 1,
+    /**
+     * Server failure - internal problem
+     */
     ServerFailure = 2,
+    /**
+     * Name error - Only for authorative name server, domain name of query does not exist
+     */
     NameError = 3,
+    /**
+     * Not implemented - Request not supported
+     */
     NotImplemented = 4,
+    /**
+     * Refused - Nameserver refuses request
+     */
     Refused = 5,
 }
 export interface MessageHeader {
