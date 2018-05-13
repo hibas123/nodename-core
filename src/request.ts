@@ -190,11 +190,13 @@ export class Request implements Message {
 
       this._header = <any>headerParser.parse(headerData);
       this._header.AD = 0;
+      this._header.RCODE = ErrorCodes.NoError;
       this._questions = parseQuestions(this._header.QDCOUNT, bodyData);
    }
 
    error(error: ErrorCodes) {
-      this._header.RCODE = error;
+      if (this._header.RCODE === ErrorCodes.NoError)
+         this._header.RCODE = error;
    }
 
    send() {
