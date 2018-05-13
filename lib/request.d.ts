@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord } from "./types";
-export declare enum queryTypes {
+export declare enum QueryTypes {
     /**
      * IPv4 address
      */

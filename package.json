@@ -1,6 +1,6 @@
 {
    "name": "nodename-core",
-   "version": "0.1.1",
+   "version": "0.1.2",
    "main": "lib/listener.js",
    "types": "lib/listener.d.ts",
    "author": "Fabian Stamm <dev@fabianstamm.de>",

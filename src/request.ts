@@ -3,7 +3,7 @@ import { Message, MessageHeader, MessageQuestion, MessageRecourceRecord } from "
 
 const MAX_LABEL_SIZE = 63;
 
-export enum queryTypes {
+export enum QueryTypes {
    /**
     * IPv4 address
     */
