@@ -197,7 +197,7 @@ export class Request implements Message {
       this.sendCallback(this.serialize());
    }
 
-   private serialize(truncate: boolean = false, rcode: 0 | 1 | 2 | 3 | 4 | 5 = 0) {
+   serialize(truncate: boolean = false, rcode: 0 | 1 | 2 | 3 | 4 | 5 = 0) {
       this._header.AA = 1;
       this._header.ANCOUNT = this.answers.length;
       this._header.ARCOUNT = this.additionals.length;
@@ -315,14 +315,12 @@ export class Request implements Message {
       let data = Buffer.alloc(length);
       let offset = 0;
       parts.forEach(e => {
-         console.log(e.length);
          data.writeUInt8(e.length, offset)
          offset++
          data.write(e, offset, e.length)
          offset += e.length
       })
       data.writeUInt8(0, offset);
-      console.log("name |", data.toString("hex"), length)
       return data;
    }
 }
@@ -349,7 +347,7 @@ export class RecourceRecord implements MessageRecourceRecord {
       return this._CLASS;
    }
 
-   _TTL: number;
+   private _TTL: number;
    set TTL(value) {
       if (value < 0 || value > 4294967295) throw new TypeError("TTL Range: 0 - 4.294.967.295")
    }

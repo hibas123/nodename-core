@@ -102,7 +102,7 @@ export declare class Request implements Message {
     _packet: Buffer;
     constructor(packet: Buffer, sendCallback: (packet: Buffer) => any);
     send(): void;
-    private serialize(truncate?, rcode?);
+    serialize(truncate?: boolean, rcode?: 0 | 1 | 2 | 3 | 4 | 5): Buffer;
     private serializeHeader();
     private serializeQuestion(question);
     private serializeResourceRecord(record);
@@ -114,7 +114,7 @@ export declare class RecourceRecord implements MessageRecourceRecord {
     TYPE: number;
     private _CLASS;
     CLASS: number;
-    _TTL: number;
+    private _TTL;
     TTL: number;
     RDATA: Buffer;
     readonly RDLENGTH: number;
