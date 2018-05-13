@@ -213,12 +213,18 @@ export class Request implements Message {
       this._header = <any>headerParser.parse(headerData);
       this._header.AD = 0;
       this._header.RCODE = ErrorCodes.NoError;
+      this._header.RA = this._header.RD;
+
       this._questions = parseQuestions(this._header.QDCOUNT, bodyData);
    }
 
    error(error: ErrorCodes) {
       if (this._header.RCODE === ErrorCodes.NoError)
          this._header.RCODE = error;
+   }
+
+   noRecursion() {
+      this._header.RA = 0;
    }
 
    send() {
@@ -232,7 +238,7 @@ export class Request implements Message {
       this._header.NSCOUNT = this.authorities.length;
       this._header.QR = 1;
       this._header.RCODE = rcode;
-      this._header.RA = 0;
+
       let questions = this.questions.map(this.serializeQuestion, this)
       let answers = this.answers.map(this.serializeResourceRecord, this)
       let authority = this.authorities.map(this.serializeResourceRecord, this)

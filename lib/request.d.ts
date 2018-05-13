@@ -103,6 +103,7 @@ export declare class Request implements Message {
     _packet: Buffer;
     constructor(packet: Buffer, sendCallback: (packet: Buffer) => any);
     error(error: ErrorCodes): void;
+    noRecursion(): void;
     send(): void;
     serialize(truncate?: boolean, rcode?: 0 | 1 | 2 | 3 | 4 | 5): Buffer;
     private serializeHeader();
