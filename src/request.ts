@@ -336,6 +336,11 @@ export class Request implements Message {
 }
 
 export class RecourceRecord implements MessageRecourceRecord {
+   /**
+    * This value can be set to identify if specific record is already set
+    */
+   Identifier: string;
+
    NAME: string
    private _TYPE: number;
    set TYPE(value) {

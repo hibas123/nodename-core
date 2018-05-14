@@ -110,6 +110,10 @@ export declare class Request implements Message {
     private serializeResourceRecord(record);
 }
 export declare class RecourceRecord implements MessageRecourceRecord {
+    /**
+     * This value can be set to identify if specific record is already set
+     */
+    Identifier: string;
     NAME: string;
     private _TYPE;
     TYPE: number;
