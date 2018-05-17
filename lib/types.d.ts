@@ -25,7 +25,97 @@ export declare enum ErrorCodes {
      */
     Refused = 5,
 }
-export interface MessageHeader {
+export declare enum QueryTypes {
+    /**
+     * IPv4 address
+     */
+    A = 1,
+    /**
+     * Nameserver
+     */
+    NS = 2,
+    /**
+     * Obsolete
+     */
+    MD = 3,
+    /**
+     * Obsolete
+     */
+    MF = 4,
+    /**
+     * Alias
+     */
+    CNAME = 5,
+    /**
+     * Start of authority
+     */
+    SOA = 6,
+    /**
+     * Experimental
+     */
+    MB = 7,
+    /**
+     * Experimental
+     */
+    MG = 8,
+    /**
+     * Experimental
+     */
+    MR = 9,
+    /**
+     * Experimental
+     */
+    NULL = 10,
+    /**
+     * Service description
+     */
+    WKS = 11,
+    /**
+     * Reverse entry (inaddr.arpa)
+     */
+    PTR = 12,
+    /**
+     * Host information
+     */
+    HINFO = 13,
+    /**
+     * Mailbox / Mail-list information
+     */
+    MINFO = 14,
+    /**
+     * Mail exchange
+     */
+    MX = 15,
+    /**
+     * Text strings
+     */
+    TXT = 16,
+    /**
+     * IPv6 address
+     */
+    AAAA = 28,
+    /**
+     * SRV records
+     */
+    SRV = 33,
+    /**
+     * Request to transfer entire zone
+     */
+    AXFR = 252,
+    /**
+     * Request for mailbox related records
+     */
+    MAILA = 254,
+    /**
+     * Request for mail agend RRs
+     */
+    MAILB = 253,
+    /**
+     * Any class
+     */
+    ANY = 255,
+}
+export interface IMessageHeader {
     /**
      *  A 16 bit identifier assigned by the program that
      *  generates any kind of query.  This identifier is copied
@@ -73,7 +163,7 @@ export interface MessageHeader {
     /**
      * Reserved for future usage, must be 0 in all queries
      */
-    Z: 0;
+    Z: 0 | 1;
     AD: 0 | 1;
     CD: 0 | 1;
     /**
@@ -109,7 +199,7 @@ export interface MessageHeader {
      */
     ARCOUNT: number;
 }
-export interface MessageQuestion {
+export interface IMessageQuestion {
     /**
      * Domain name represented as sequence of labels
      * Each label consists of a length octed followed
@@ -169,9 +259,9 @@ export interface MessageRecourceRecord {
      */
     RDATA: Buffer;
 }
-export interface Message {
-    header: MessageHeader;
-    questions: MessageQuestion[];
+export interface IMessage {
+    header: IMessageHeader;
+    questions: IMessageQuestion[];
     answers: MessageRecourceRecord[];
     authorities: MessageRecourceRecord[];
     additionals: MessageRecourceRecord[];
