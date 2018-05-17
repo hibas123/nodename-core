@@ -8,13 +8,19 @@
    "scripts": {
       "build": "tsc",
       "watch": "tsc --watch",
-      "test": "nodemon lib/test.js"
+      "test": "mocha src/test.ts --require ts-node/register",
+      "testwatch": "mocha src/test.ts --require ts-node/register --watch --watch-extensions ts"
    },
    "devDependencies": {
       "@types/binary-parser": "^1.3.0",
+      "@types/chai": "^4.1.3",
+      "@types/mocha": "^5.2.0",
       "@types/node": "^10.0.8",
+      "chai": "^4.1.2",
+      "mocha": "^5.1.1",
       "nodemon": "^1.17.4",
-      "typescript": "^2.8.3"
+      "typescript": "^2.8.3",
+      "ts-node": "^6.0.3"
    },
    "dependencies": {
       "binary-parser": "^1.3.2"
