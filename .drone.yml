@@ -1,0 +1,6 @@
+pipeline:
+  core:
+    image: node
+    commands:
+      - npm install
+      - npm test
