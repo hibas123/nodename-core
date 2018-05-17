@@ -2,15 +2,16 @@ import * as net from "net"
 import * as dgram from "dgram";
 import { Request } from "./request";
 import { PassThrough } from "stream";
+
 export default class Listener {
    private udp: dgram.Socket
    private tcp: net.Server
-   constructor(type: "udp" | "tcp", onRequest: (request: Request) => any, port: number, host: string = "0.0.0.0") {
+   constructor(type: "udp" | "tcp", onRequest: (request: Request) => any, host: string = "0.0.0.0") {
       switch (type) {
          case "udp":
             this.udp = dgram.createSocket("udp4")
             this.udp.on("listening", () => {
-               console.log(`UDP Server Listening on ${port}`)
+               console.log(`UDP Server Listening on 53`)
             })
 
             this.udp.on("message", (message, remote) => {
@@ -21,7 +22,7 @@ export default class Listener {
                onRequest(request);
             })
 
-            this.udp.bind(port, host)
+            this.udp.bind(53, host)
             break;
          case "tcp":
             console.log("Not correct implemented")
@@ -53,7 +54,8 @@ export default class Listener {
                   }
                });
             });
-            this.tcp.listen(port, host);
+            this.tcp.listen(53, host);
+            console.log(`TCP Server Listening on 53`)
             break;
          default:
             throw new Error("Unknown socket type")
